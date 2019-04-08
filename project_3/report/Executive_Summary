@@ -1,0 +1,86 @@
+# Project 3 - Reddit API
+
+## Introduction
+
+
+The objective of this project is to train our model to be able to classify a subreddit post into one of two subreddits. The subreddit chosen are [World news] ['www.reddit.com/worldnews'] and [Funny] ['www.reddit.com/funny].
+
+Given the discrete nature of the target prediction, a classification model is needed. The different models used are evaluated based on the (default) accuracy score.
+
+The best model resulted in a 94% accuracy, based on the _countVectorizer_ and Multinomial Naive Bayes_ models.
+
+Steps toward reaching that best model will be described. The best model will be the focus of analysis in this technical report. However, subsequent attempts to improve the model will be described, when relevant.
+
+### Scope of the project:
+
+**The outline below cover the scope of the steps taken in this modeling exercise:**
+  - Data collection
+  - Data cleaning and EDA
+  - Model setting
+  - Model evaluation
+  - Problem address and conclusion
+
+### Data collection
+
+About 3400 unique posts were collected from reddit's API.
+The data extraction was limited to the last 1000 posts at any point in time. the data was extracted over 3 days. 61.5% of the data consisted of 'funny' titles and 38.5% were 'worldnews' titles.
+
+
+### Exploratory Data analysis
+
+the categories that were retained at the data extraction stage were mostly empty. others, on a second thought, were dismissed for lack of relevance for the problem at hand, which is the successful  classification of subreddits, on way or another. For example, the author's name or the subreddit id would help locate thee subreddit but were deemed irrelevant in this particular problem.
+In fact, only the title subreddit was retained as the predicting feature.
+
+### Data cleaning
+
+** dropping duplicates**
+
+Given that the data extraction is limited to 1000 posts and that for every inquiry the latest 1000 posts are extracted, when there were no new 1000 posts within the 24 hours, duplicate posts are extracted. Actually, at one attempt to boost the model, those duplicates were as a kind of bootstrapping, but it didn't help the cause.
+
+** resetting the index **
+
+given that for each extraction the index resets to 0 and that for each subreddit the index starts at 0, several indeces had the same index.
+
+** filtering text for certain patterns, using the regex module** However, this did not change the model's strength.
+
+### Setting the model:
+
+The problem has been defined as a classification problem. Accordingly, several models have been considered.
+As for the 'text extraction' and 'vectorization' technique, the _countVectorizer_ and the TfidfVectorizer were put to compete. As for the classification model, itself, the Multitnomial Naive Bayes_ and the logistic regression were put to compete.
+
+#### Feature creation:
+As a first step, only the title of the subreddit was used as a predictor. The name of the subreddit, was obviously set as the target to be predicted. when the model evaluated strongly, it was decided not to increase the number of predictors.
+
+**The data set was split into a training set and test set for model validation.**
+
+#### Setting the pipeline and the Gridsearch:
+
+The pipeline is a convenient way to commingle the use of several  modules and it is even more prone to the use of Gridsearch tool to iterate through the parameters of each one of these modules, thereby optimizing not only each module on a standalone basis but take into consideration their interaction.
+
+### Model evaluation and iteration
+
+the first model that was run was the Logistic Regression model, which resulted in a 89% accuracy score on the test data. Starting at a baseline performance of 61.5%, the model's score was considered very strong. However, the training set scored over 98%, which indicated a high variance and an overfit to the training data.
+The Multinomial Naive Bayes model was used to try and reduce the variance, which it did bring the test score to 94% while the training score also went up to 99%, which partially offset the reduction in the overfit.
+
+The TF-IDF was used in lieu of the countVectorizer but did not improve the result.
+
+### Final recommendations and future steps
+
+This report highlighted the steps undertaken to come up with the best model possible in this reddit classification exercise. The report also describes the steps undertaken to strengthen the model, mainly through trying more than one classification model and trying more than one text/ feature extraction technique.
+
+** An extension of this work would be to:**
+- Leave the duplicates, a way of bootstrapping the data but also to reduce the overfit on the training data
+- Have a closer look at the origin of the False predictions, through a confusion matrix: is the error mainly False positives or False negatives, or a bit of both.
+- Balancing the classes might reveal some positive pattern, although it will come at the expense of the size of the dataset
+- Try a third or a fourth model, the KNN, SVM, or others.
+- include another subreddit that would be closer to one of the existing subreddit to make it more challenging to learn and also make good use of other more sofisticated vectorization and/or classification models.
+- use statsmodel for more insight on the logregression results.
+
+
+## Attachments:
+please find attached to
+- this executive summary:
+- a Jupyter notebook with the model code
+- kaggle submission snapshot and score
+- the predictions csv file along with the original dataset
+- Presentation slides
