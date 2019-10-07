@@ -4,7 +4,7 @@
 
 
 This project is about the performance of the two major college entry standard tests in the US: the SAT and the ACT.
-The SAT is the older test and as such was leading the college standardized test scene for a long time. The CAT which was launched in the 50's won ground and has become, as per the leader in the industry.
+The SAT is the older test and as such was leading the college standardized test scene for a long time. The ACT which was launched in the 50's won ground and has become the leader in the industry.
 
 This project will analyze, among other things, the participation rates of both tests within the 50 states of the US. It will shed light on   trends based on the analysis of the 2017 and 2018 numbers for both tests.
 
